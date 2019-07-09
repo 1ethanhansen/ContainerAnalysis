@@ -7,6 +7,11 @@ from objects.image import Image
 
 from utils.indexparser import get_tarfile
 
+#Just making sure travis CI works for now
+def travis_trial():
+	print("It works")
+	return True
+
 def output_app_keywords(main_image, f):
 	""" use keywords from App. no for loop so outputs only once"""
 
