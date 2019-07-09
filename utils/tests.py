@@ -149,19 +149,19 @@ def get_registries(yaml_doc):
 
 def print_obj(app_obj):
 
-	print "\nApp: %s \nLen Images: %s \n Sub Images: %s \n "%(app_obj.name, str(len(app_obj.images)), str(len(app_obj.sub_images)))
+	print("\nApp: %s \nLen Images: %s \n Sub Images: %s \n "%(app_obj.name, str(len(app_obj.images)), str(len(app_obj.sub_images))))
 
-	print "keywords"
-	print "----"
+	print("keywords")
+	print("----")
 	for key in app_obj.keywords:
-		print key
+		print(key)
 
 	for image_obj in app_obj.sub_images:
-		print "\nimage name: %s"%(image_obj.name)
-		print "image org: %s"%(image_obj.org)
-		print "Num tags: %s"%(str(len(image_obj.tags)))
+		print("\nimage name: %s"%(image_obj.name))
+		print("image org: %s"%(image_obj.org))
+		print("Num tags: %s"%(str(len(image_obj.tags))))
 		for tag in image_obj.tags:
-			print "tag: %s"%(tag)
+			print("tag: %s"%(tag))
 
 
 def testit(app_name, yaml_doc):
@@ -188,10 +188,10 @@ def testit(app_name, yaml_doc):
 	get_tarfile(app_obj) #Download tarballs and start parsing
 
 	if str(len(app_obj.images)) == "0":
-		print app_obj.name
+		print(app_obj.name)
 		print("THIS app has no tags. Likely not parsed correctly")
 		print("\nCheck out:")
-		print "\t cat ./Applications/%s/values.yaml"%(app_obj.name)
+		print("\t cat ./Applications/%s/values.yaml"%(app_obj.name))
 		print("\nbye bye")
 		sys.exit()
 
@@ -199,19 +199,19 @@ def testit(app_name, yaml_doc):
 	yaml_doc = add_header_to_yaml() # add creds to top of yaml file
 	hub_list = get_registries(yaml_doc)
 
-	print "\n Begin test\n app_obj.image =? app_obj.tags"
-	print len(app_obj.images)
-	print len(app_obj.tags)
+	print("\n Begin test\n app_obj.image =? app_obj.tags")
+	print(len(app_obj.images))
+	print(len(app_obj.tags))
 	for i in range(len(app_obj.images)):
 		
 		name = str(app_obj.images[i])
 		org = str(app_obj.clean_repos[i])
 
 		if len(app_obj.tags) == 0:
-			print "NO CONTAINERS"
+			print("NO CONTAINERS")
 			container = "Not found!"
 		else: 
-			#print app_obj.images
+			#print(app_obj.images)
 			if len(app_obj.tags) < len(app_obj.images):
 				container = str(app_obj.tags[0])
 			else:
