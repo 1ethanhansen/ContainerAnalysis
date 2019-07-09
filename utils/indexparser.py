@@ -173,7 +173,7 @@ def get_app_info(app_obj, yaml_file):
 					#TODO ibm-eventstreams-dev lands here with "ibmcom" as the repo!
 					#repo is not a list and has no slash
 	else: 
-		print "\n Cannot locate any repos for images. \n NADA! \n"
+		print("\n Cannot locate any repos for images. \n NADA! \n")
 
 	#NOTE: number tags != number of repos
 	parse_image_repo(app_obj)

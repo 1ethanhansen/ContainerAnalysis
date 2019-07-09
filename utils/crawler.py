@@ -75,7 +75,7 @@ def get_images_from_repo(repo_pages, repo_count, regis, org, header):
 	#range(start,end,step) so from page=1 to page=repo_pages+1 cause python range starts at 0 -> n-1
 	for i in range(1,repo_pages+1):
 		repo_url = 'https://' + regis + '/v2/repositories/' + org + '/?page='+ str(i) +'&page_size=100'
-		print repo_url
+		print(repo_url)
 		r = requests.get(repo_url, headers=header)
 		#checkStatusCode(r, repo_url)
 		data = json.loads(r.text)
@@ -85,13 +85,13 @@ def get_images_from_repo(repo_pages, repo_count, regis, org, header):
 			repo_extra = int(repo_count % 100) #gotta do this again to avoid another var in func call
 			for j in range(repo_extra):
 				image_name = data["results"][j]["name"]
-				print (j, image_name)
+				print(j, image_name)
 			break #last page so no more repos.
 
 		#otherwise we have 100 images on this page for repo
 		for j in range(100):
 			image_name = data["results"][j]["name"]
-			print ("(dockerhub, %s, %s)"% (org, image_name))
+			print("(dockerhub, %s, %s)"% (org, image_name))
 
 #NEVER CALLED. can be used in the future as a crawler.gets all images in the list of organizations
 def queryHub():
