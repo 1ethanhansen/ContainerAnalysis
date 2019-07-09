@@ -1,5 +1,6 @@
 # The Container Analysis Project
-An application to gather information about images and containers on DockerHub and output this helpful info into a CSV file.
+An application to gather information about images and containers on DockerHub and output this helpful info into a CSV file.  
+[![Build Status](https://travis-ci.org/EthanHans3n/ContainerAnalysis.svg?branch=master)](https://travis-ci.org/EthanHans3n/ContainerAnalysis)
 
 ## NOTE: currently only supports dockerhub repository
  
