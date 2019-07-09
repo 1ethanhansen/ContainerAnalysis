@@ -2,7 +2,7 @@ import requests
 import json
 import logging
 
-def find_image(self, regis):
+def find_image(self, regis)
 	"""Pretty much the same as get_images_from_repo() but finds a specific
 	image"""
 	logging.warning('Searching for %s now...', self.name)
