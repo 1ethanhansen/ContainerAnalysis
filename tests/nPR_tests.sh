@@ -1,7 +1,6 @@
 #!/bin/bash
 
 #test different args to get-image-info
-python get-image-info.py --help
 python get-image-info.py user.yaml
 python get-image-info.py user.yaml --debug
 
