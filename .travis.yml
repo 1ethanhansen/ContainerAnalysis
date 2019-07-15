@@ -13,7 +13,7 @@ script:
   #Two bash scripts handle the rest so this file doesn't get too messy
   - chmod +x tests/nPR_tests.sh
   - chmod +x tests/pr_okay_tests.sh
-  - if [ $TRAVIS_PULL_REQUEST ]; then 
+  - if [ $TRAVIS_PULL_REQUEST != false ]; then 
         ./tests/pr_okay_tests.sh;
     else
         ./tests/nPR_tests.sh;
