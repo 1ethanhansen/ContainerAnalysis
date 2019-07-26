@@ -2,10 +2,11 @@ import logging
 import argparse
 import yaml
 import urllib
-from datetime import datetime
+from datetime import datetime, timedelta
 import sys
 import os
 import errno
+import difflib
 
 from objects.hub import Hub
 from objects.image import App
@@ -132,9 +133,7 @@ def parse_index_yaml(index_file_loc, wanted_apps=None):
 	return app_list, need_keywords_list #currently just apps with names and base urls
 
 def setup_output_file():
-	""" Initialize the Image object and add tags, repos, and archs to image obj.
-	Once Image obj is setup, add it to a sublist of App obj. This function will 
-	call output_CSV() for each App from the helm chart."""
+	"""Creates and returns file object for writing results"""
 	
 	#set up file name, make directory if it doesn't exist
 	date = datetime.today().strftime("%d-%b-%Y")	#16-Jul-2019
@@ -146,3 +145,30 @@ def setup_output_file():
 	f.write("Product,App,amd64,ppc64le,s390x,Images,Container,amd64,ppc64le,s390x,Tag Exists?\n")
 	
 	return f
+
+def diff_last_files():
+	"""Opens today's file and yesterday's, reads the lines, then
+		returns the difference between (if there is a difference)
+	"""
+
+	# Set up file names for today and yesterday
+	today = datetime.today().strftime("%d-%b-%Y")  # 26-Jul-2019
+	today_file_loc = "archives/results-{}.csv".format(today)
+	yesterday = (datetime.today() - timedelta(1)).strftime("%d-%b-%Y")
+	yesterday_file_loc = "archives/results-{}.csv".format(yesterday)
+
+	# Open both files (read mode) and remove commas from every line
+	try:
+		today_f_commas = open(today_file_loc, "r").readlines()
+		yesterday_f_commas = open(yesterday_file_loc, "r").readlines()
+	except:
+		print("File not found, could not diff files\nCheck archives dir")
+		return "File not found"
+	today_lines = [l.replace(",", "") for l in today_f_commas]
+	yesterday_lines = [l.replace(",", "") for l in yesterday_f_commas]
+	# Print only the diff-ing lines
+	for line in difflib.ndiff(yesterday_lines, today_lines):
+		if(line[0] != " "):  # diff-ing lines start with non-space
+			print(line)
+	return "Finished properly"
+

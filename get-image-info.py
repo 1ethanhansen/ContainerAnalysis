@@ -1,13 +1,8 @@
 """ Written by Mick Tarsel
 	Optimized by Ethan Hansen"""
-import requests
-import errno
 import shutil
-import json
+
 from objects.image import Image
-#TODO what is actually neded from indexparser
-#from utils.indexparser import *
-#from utils.tests import testit
 from datetime import datetime
 from utils.setup_utils import *
 
@@ -65,17 +60,17 @@ def main(args):
 
 		if logging.getLogger().level == logging.DEBUG:
 			app.generate_output()
-		
-	"""needs list of hubs (registries) to create special header per each
-	image. creates Image objects from images in App. writes to csv 
-	file via output_CSV() """
+
+	output_f.close()
+
+	diff_last_files()
 
 	#TODO - output names of bad apps at end of log
 	print("\n========\n")
 	i = 0
 	for app in app_list:
 		if app.is_bad == True:
-			i = i + 1
+			i += 1
 			print(app.name)
 	print(i)
 
